@@ -37,10 +37,10 @@ class SendSmtpEmail(SendEmail):
         kwargs = super(SendSmtpEmail, cls).from_crawler_kwargs(crawler)
         kwargs.update(
             {
-                "smtp_host": crawler.settings.get("SPIDERMON_SMTP_HOST", self.smtp_host)
-                "smtp_port": crawler.settings.get("SPIDERMON_SMTP_PORT", self.smtp_port)
-                "smtp_user": crawler.settings.get("SPIDERMON_SMTP_USER")
-                "smtp_password": crawler.settings.get("SPIDERMON_SMTP_PASSWORD")
+                "smtp_host": crawler.settings.get("SPIDERMON_SMTP_HOST"),
+                "smtp_port": crawler.settings.get("SPIDERMON_SMTP_PORT"),
+                "smtp_user": crawler.settings.get("SPIDERMON_SMTP_USER"),
+                "smtp_password": crawler.settings.get("SPIDERMON_SMTP_PASSWORD"),
             }
         )
         return kwargs
@@ -56,7 +56,7 @@ class SendSmtpEmail(SendEmail):
 
         if not _sender or not _to:
             return
-                
+
         server = smtplib.SMTP(self.smtp_host, self.smtp_port)
         server.starttls()
         server.login(self.smtp_user, self.smtp_pass)
