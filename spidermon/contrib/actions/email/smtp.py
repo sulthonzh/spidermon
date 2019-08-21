@@ -46,8 +46,8 @@ class SendSmtpEmail(SendEmail):
         return kwargs
 
     def send_message(self, message):
-        _sender = message.get("sender")
-        _to = message.get("to")
+        _sender = message.get("From")
+        _to = message.get("To")
 
         if not _sender:
             raise NotConfigured("You must provide the sender.")
