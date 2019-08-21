@@ -45,21 +45,18 @@ class SendSmtpEmail(SendEmail):
         )
         return kwargs
 
-    def send_message(self, message):
-        _sender = message.get("From")
-        _to = message.get("To")
-
-        if not _sender:
+    def send_message(self, message):       
+        if not self.sender:
             raise NotConfigured("You must provide the sender.")
-        if not _to:
+        if not self.to:
             raise NotConfigured("You must provide the receiver.")
 
-        if not _sender or not _to:
+        if not self.sender or not self.to:
             return
 
         server = smtplib.SMTP(self.smtp_host, self.smtp_port)
         server.starttls()
         server.login(self.smtp_user, self.smtp_pass)
         text = message.as_string()
-        server.sendmail(_sender, _to, text)
+        server.sendmail(self.sender, self.to, text)
         server.quit()
