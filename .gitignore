@@ -55,3 +55,10 @@ target/
 
 # vim .swp/.swo/.sw* recovery files
 *.sw*
+
+# Virtual environments
+.venv/
+venv/
+
+# Type checkers
+.mypy_cache/
